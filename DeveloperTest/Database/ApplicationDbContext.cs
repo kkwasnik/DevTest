@@ -20,15 +20,14 @@ namespace DeveloperTest.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Job>()
-                .HasKey(x => x.JobId);
-
+                .HasIndex(x => x.JobId).IsUnique();
+        
             modelBuilder.Entity<Customer>()
-                .HasKey(x => x.CustomerId);
+                .HasIndex(x => x.CustomerId).IsUnique();
 
             modelBuilder.Entity<Job>()
                 .Property(x => x.JobId)
                 .ValueGeneratedOnAdd();
-
             modelBuilder.Entity<Customer>()
                 .Property(x => x.CustomerId)
                 .ValueGeneratedOnAdd();

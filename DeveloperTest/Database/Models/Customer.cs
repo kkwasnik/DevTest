@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using DeveloperTest.Models;
 
 namespace DeveloperTest.Database.Models
@@ -10,5 +10,7 @@ namespace DeveloperTest.Database.Models
         public string Name { get; set; }
 
         public CustomerType Type { get; set; }
+
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

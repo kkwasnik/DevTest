@@ -1,5 +1,9 @@
-<p>JobId: {{job.jobId}}</p>
-<p>Engineer: {{job.engineer}}</p>
-<p>When: {{job.when | date:'shortDate'}}</p>
+<div *ngIf="job">
+  <p>JobId: {{job.jobId}}</p>
+  <p>Engineer: {{job.engineer}}</p>
+  <p>When: {{job.when | date:'shortDate'}}</p>
+  <p>Customer Name: {{customerName}}</p>
+  <p *ngIf="customerType">Customer Type: {{customerType}}</p>
 
-<a [routerLink]="['/jobs']">Back</a>
+  <a [routerLink]="['/jobs']">Back</a>
+</div>

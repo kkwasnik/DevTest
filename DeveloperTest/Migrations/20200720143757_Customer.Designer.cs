@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeveloperTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200720094425_Customer")]
+    [Migration("20200720143757_Customer")]
     partial class Customer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace DeveloperTest.Migrations
 
                     b.HasKey("CustomerId");
 
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
                     b.ToTable("Customers");
 
                     b.HasData(
@@ -43,7 +46,7 @@ namespace DeveloperTest.Migrations
                         {
                             CustomerId = 1,
                             Name = "CustomerKK",
-                            Type = 1
+                            Type = 2
                         });
                 });
 
@@ -54,6 +57,9 @@ namespace DeveloperTest.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Engineer")
                         .HasColumnType("nvarchar(max)");
 
@@ -62,6 +68,11 @@ namespace DeveloperTest.Migrations
 
                     b.HasKey("JobId");
 
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("JobId")
+                        .IsUnique();
+
                     b.ToTable("Jobs");
 
                     b.HasData(
@@ -69,8 +80,15 @@ namespace DeveloperTest.Migrations
                         {
                             JobId = 1,
                             Engineer = "Test",
-                            When = new DateTime(2020, 7, 20, 11, 44, 25, 552, DateTimeKind.Local).AddTicks(8515)
+                            When = new DateTime(2020, 7, 20, 16, 37, 56, 761, DateTimeKind.Local).AddTicks(8324)
                         });
+                });
+
+            modelBuilder.Entity("DeveloperTest.Database.Models.Job", b =>
+                {
+                    b.HasOne("DeveloperTest.Database.Models.Customer", "Customer")
+                        .WithMany("Jobs")
+                        .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618
         }
